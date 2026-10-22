@@ -1,0 +1,37 @@
+{
+  "name": "Homelab Dashboard",
+  "slug": "homelabdashboard",
+  "categories": [8],
+  "date_created": "2026-10-22",
+  "type": "ct",
+  "updateable": true,
+  "privileged": false,
+  "interface_port": 3000,
+  "documentation": "https://github.com/Agurri/homelab-dashboard",
+  "website": "https://github.com/Agurri/homelab-dashboard",
+  "logo": "https://raw.githubusercontent.com/Agurri/homelab-dashboard/main/public/logo.svg",
+  "description": "Unified dashboard for Proxmox, TrueNAS, LXC containers, VMs, Docker workloads, service health, and network topology.",
+  "install_methods": [
+    {
+      "type": "default",
+      "script": "ct/HomelabDashboard.sh",
+      "resources": {
+        "cpu": 2,
+        "ram": 2048,
+        "hdd": 10,
+        "os": "Debian",
+        "version": "12"
+      }
+    }
+  ],
+  "default_credentials": {
+    "username": null,
+    "password": null
+  },
+  "notes": [
+    {
+      "text": "After installation, edit /opt/homelab-dashboard/shared/.env to add Proxmox and TrueNAS API credentials, then restart the service.",
+      "type": "info"
+    }
+  ]
+}
