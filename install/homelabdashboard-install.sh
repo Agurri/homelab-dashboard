@@ -7,10 +7,10 @@ APP_DIR="/opt/homelab-dashboard"
 SERVICE_USER="dashboard"
 SERVICE_NAME="homelab-dashboard"
 
-VERSION="${DASHBOARD_VERSION:-v1.0.0}"
+BRANCH="${DASHBOARD_BRANCH:-main}"
 REPO_URL="${DASHBOARD_REPO:-https://github.com/Agurri/homelab-dashboard.git}"
 PORT="${DASHBOARD_PORT:-3000}"
-RELEASE_DIR="$APP_DIR/releases/$VERSION"
+RELEASE_DIR="$APP_DIR/releases/$(date +%Y%m%d%H%M%S)"
 CURRENT_LINK="$APP_DIR/current"
 
 color
@@ -42,10 +42,10 @@ mkdir -p \
 chown -R "$SERVICE_USER:$SERVICE_USER" "$APP_DIR"
 msg_ok "Created service user and directories"
 
-msg_info "Downloading Homelab Dashboard $VERSION"
-sudo -u "$SERVICE_USER" git clone --depth 1 --branch "$VERSION" \
+msg_info "Downloading Homelab Dashboard from $BRANCH"
+sudo -u "$SERVICE_USER" git clone --depth 1 --branch "$BRANCH" \
   "$REPO_URL" "$RELEASE_DIR"
-msg_ok "Downloaded Homelab Dashboard $VERSION"
+msg_ok "Downloaded Homelab Dashboard"
 
 msg_info "Configuring Homelab Dashboard"
 sudo -u "$SERVICE_USER" bash <<EOF
@@ -69,8 +69,8 @@ REFRESH_SECONDS=15
 ENV
 fi
 
-npm ci --omit=dev
-npm run migrate --if-present
+npm install --omit=dev
+npm run migrate
 EOF
 
 chmod 600 "$APP_DIR/shared/.env"

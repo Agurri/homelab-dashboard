@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Homelab Control Center</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Homelab Control Center</h1>
+      <p>Docker-free Proxmox &amp; TrueNAS dashboard</p>
+    </div>
+    <div id="status" class="pill">Loading…</div>
+  </header>
+
+  <main>
+    <section class="toolbar">
+      <input id="search" type="search" placeholder="Search machines, IPs, tags…">
+      <select id="category">
+        <option value="all">All categories</option>
+        <option value="media">Media</option>
+        <option value="network">Network</option>
+        <option value="monitoring">Monitoring</option>
+        <option value="database">Database</option>
+        <option value="docker">Docker</option>
+        <option value="utilities">Utilities</option>
+      </select>
+      <button id="addMachine">Add machine</button>
+    </section>
+
+    <section id="machines" class="grid"></section>
+  </main>
+
+  <dialog id="machineDialog">
+    <form id="machineForm">
+      <h2>Add / edit machine</h2>
+      <label>VMID<input name="vmid" required></label>
+      <label>Hostname<input name="hostname" required></label>
+      <label>IP address<input name="ip"></label>
+      <label>Proxmox node<input name="node"></label>
+      <label>Category
+        <select name="category">
+          <option value="media">Media</option>
+          <option value="network">Network</option>
+          <option value="monitoring">Monitoring</option>
+          <option value="database">Database</option>
+          <option value="docker">Docker</option>
+          <option value="utilities">Utilities</option>
+        </select>
+      </label>
+      <label>Web URL<input name="url"></label>
+      <label>Tags<input name="tags" placeholder="community-script,media"></label>
+      <label>Status
+        <select name="status">
+          <option value="running">Running</option>
+          <option value="stopped">Stopped</option>
+          <option value="unknown">Unknown</option>
+        </select>
+      </label>
+      <menu>
+        <button value="cancel" formmethod="dialog">Cancel</button>
+        <button value="default" id="saveMachine">Save</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <script src="/app.js"></script>
+</body>
+</html>

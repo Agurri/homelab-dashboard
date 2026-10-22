@@ -9,7 +9,7 @@ var_os="debian"
 var_version="12"
 var_unprivileged="1"
 
-export DASHBOARD_VERSION="${DASHBOARD_VERSION:-v1.0.0}"
+export DASHBOARD_BRANCH="${DASHBOARD_BRANCH:-main}"
 export DASHBOARD_REPO="${DASHBOARD_REPO:-https://github.com/Agurri/homelab-dashboard.git}"
 export DASHBOARD_PORT="${DASHBOARD_PORT:-3000}"
 
