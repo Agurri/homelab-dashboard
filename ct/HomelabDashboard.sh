@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2026 Olivier
-# License: MIT
-
 APP="HomelabDashboard"
 var_tags="dashboard;monitoring;proxmox;truenas"
 var_cpu="2"
@@ -15,6 +12,8 @@ var_unprivileged="1"
 export DASHBOARD_VERSION="${DASHBOARD_VERSION:-v1.0.0}"
 export DASHBOARD_REPO="${DASHBOARD_REPO:-https://github.com/Agurri/homelab-dashboard.git}"
 export DASHBOARD_PORT="${DASHBOARD_PORT:-3000}"
+
+source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/build.func)
 
 header_info "$APP"
 base_settings
@@ -33,22 +32,17 @@ function default_settings() {
   CT_DHCP="1"
 }
 
-function update_script() {
-  msg_info "Updating ${APP}"
-  lxc-attach -n "$CTID" -- bash -c "$(curl -fsSL https://raw.githubusercontent.com/Agurri/homelab-dashboard/main/tools/homelabdashboard-update.sh)"
-  msg_ok "Updated ${APP}"
-}
-
 start
 build_container
 description
 
-msg_info "Starting ${APP}"
+msg_info "Starting Homelab Dashboard"
 lxc-start -n "$CTID"
 sleep 5
-msg_ok "Started ${APP}"
+msg_ok "Started Homelab Dashboard"
 
-lxc-attach -n "$CTID" -- bash -c "$(curl -fsSL https://raw.githubusercontent.com/Agurri/homelab-dashboard/main/install/homelabdashboard-install.sh)"
+lxc-attach -n "$CTID" -- bash -c \
+  "$(curl -fsSL https://raw.githubusercontent.com/Agurri/homelab-dashboard/main/install/homelabdashboard-install.sh)"
 
 IP=$(pct exec "$CTID" -- hostname -I | awk '{print $1}')
 

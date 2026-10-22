@@ -1,10 +1,6 @@
 node_modules/
 dist/
-build/
 .env
-.env.local
 *.db
 *.sqlite
 *.log
-coverage/
-.DS_Store

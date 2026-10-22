@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2026 Olivier
-# License: MIT
-
 source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/install.func)
 
 APP="homelab-dashboard"
@@ -46,7 +43,8 @@ chown -R "$SERVICE_USER:$SERVICE_USER" "$APP_DIR"
 msg_ok "Created service user and directories"
 
 msg_info "Downloading Homelab Dashboard $VERSION"
-sudo -u "$SERVICE_USER" git clone --depth 1 --branch "$VERSION" "$REPO_URL" "$RELEASE_DIR"
+sudo -u "$SERVICE_USER" git clone --depth 1 --branch "$VERSION" \
+  "$REPO_URL" "$RELEASE_DIR"
 msg_ok "Downloaded Homelab Dashboard $VERSION"
 
 msg_info "Configuring Homelab Dashboard"

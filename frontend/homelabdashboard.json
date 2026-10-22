@@ -9,7 +9,6 @@
   "interface_port": 3000,
   "documentation": "https://github.com/Agurri/homelab-dashboard",
   "website": "https://github.com/Agurri/homelab-dashboard",
-  "logo": "https://raw.githubusercontent.com/Agurri/homelab-dashboard/main/public/logo.svg",
   "description": "Unified dashboard for Proxmox, TrueNAS, LXC containers, VMs, Docker workloads, service health, and network topology.",
   "install_methods": [
     {
